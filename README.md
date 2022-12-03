@@ -27,6 +27,7 @@ Each block can have any number of input and output signals. For the sake of simp
 
 In addition to that, there are some common members all blocks should have. For eg, the function definition, the run function, the ability to turn off the automatic run capablity but instead run only on a call from an external source, say a scheduler runnig off a master clock, for eg.. 
 
+For the moment, lets assume that all input and output types are floats. In the future, it will be need to be changed to a template
 ## Model
 Initial impressions indicate that subsystems and models be defined as a bidirectional graph. More details to be fleshed out as the development progresses.
 
