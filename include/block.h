@@ -97,9 +97,9 @@ namespace n_block
 			return child_block_;
 		}
 
-		void set_input_port(int port_num, func_unit* parent_op_port, block* parent_block_)
+		void set_input_port(int port_num, base::data_unit* parent_op_data, block* parent_block_)
 		{
-			inputs[port_num] = *parent_op_port;
+			inputs[port_num] = *parent_op_data;
 			add_input_block(parent_block_);
 		}
 
