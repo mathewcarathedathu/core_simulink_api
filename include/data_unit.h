@@ -3,8 +3,11 @@
 
 #include <stdint.h>
 
-struct data_unit
+namespace base
 {
-	float data;
-	double update_num = 0;
-};
+	struct data_unit
+	{
+		float data;
+		double update_num = 0;
+	};
+}
