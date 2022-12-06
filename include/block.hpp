@@ -36,13 +36,24 @@ namespace n_block
 		
 	public:
 
-		block() : subsystem_id(-1), type(block_type::E_NONE) {};
+		block() : 
+			subsystem_id(-1), 
+			type(block_type::E_NONE) 
+		{};
 
-		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_) : subsystem_id(-1), func_unit(n_inputs, n_outputs), type(b_type_) {};
+		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_) : 
+			subsystem_id(-1), 
+			func_unit(n_inputs, n_outputs), 
+			type(b_type_) 
+		{};
 
-		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_, int ss_id) : subsystem_id(ss_id), func_unit(n_inputs, n_outputs), type(b_type_) {};
+		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_, int ss_id) : 
+			subsystem_id(ss_id), 
+			func_unit(n_inputs, n_outputs), 
+			type(b_type_) 
+		{};
 
-		virtual void execute() = 0;
+		virtual bool execute() = 0;
 
 		int get_subsystemID()
 		{

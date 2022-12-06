@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include <memory>
+#include <set>
+
 #include "data_unit.h"
 namespace base
 {
