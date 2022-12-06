@@ -33,38 +33,14 @@ namespace n_block
 		int subsystem_id;
 		block_type type;
 
-		std::set<block*> child_block;
-		std::set<block*> parent_block;
-
-		void add_input_block(block* block_)
-		{
-			parent_block.insert(block_);
-		}
-
-		void add_output_block(block* block_)
-		{
-			child_block.insert(block_);
-		}
-
+		
 	public:
 
-		block(): subsystem_id(- 1), type(block_type::E_NONE)
-		{
-			child_block.clear();
-			parent_block.clear();
-		}
+		block() : subsystem_id(-1), type(block_type::E_NONE) {};
 
-		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_) : subsystem_id(-1), func_unit(n_inputs, n_outputs), type(b_type_)
-		{
-			child_block.clear();
-			parent_block.clear();
-		}
+		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_) : subsystem_id(-1), func_unit(n_inputs, n_outputs), type(b_type_) {};
 
-		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_, int ss_id) : subsystem_id(ss_id), func_unit(n_inputs, n_outputs), type(b_type_)
-		{
-			child_block.clear();
-			parent_block.clear();
-		}
+		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_, int ss_id) : subsystem_id(ss_id), func_unit(n_inputs, n_outputs), type(b_type_) {};
 
 		virtual void execute() = 0;
 
@@ -85,27 +61,27 @@ namespace n_block
 			return subsystem_id;
 		}
 
-		std::set<block*> get_parent_blocks()
+		std::set<func_unit*> get_parent_blocks()
 		{
-			std::set<block*> parent_block_(parent_block);
+			std::set<func_unit*> parent_block_(parent);
 			return parent_block_;
 		}
 
-		std::set<block*> get_child_blocks()
+		std::set<func_unit*> get_child_blocks()
 		{
-			std::set<block*> child_block_(child_block);
+			std::set<func_unit*> child_block_(child);
 			return child_block_;
 		}
 
 		void set_input_port(int port_num, base::data_unit* parent_op_data, block* parent_block_)
 		{
 			inputs[port_num] = *parent_op_data;
-			add_input_block(parent_block_);
+			add_input(parent_block_);
 		}
 
 		void set_output_port(block* child_block_)
 		{
-			add_output_block(child_block_);
+			add_output(child_block_);
 		}
 	};
 }

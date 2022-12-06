@@ -13,17 +13,38 @@ namespace base
 		uint8_t num_inputs;
 		uint8_t num_outputs;
 
+		
 	protected:
 		data_unit* inputs;
 		data_unit* outputs;
 
+		std::set<func_unit*> child;
+		std::set<func_unit*> parent;
+
+		void add_input(func_unit* unit_)
+		{
+			parent.insert(unit_);
+		}
+
+		void add_output(func_unit* unit_)
+		{
+			child.insert(unit_);
+		}
+
 	public:
-		func_unit() : id(-1) {};
+		func_unit() : id(-1) 
+		{
+			child.clear();
+			parent.clear();
+		}
 
 		func_unit(uint8_t n_inputs_, uint8_t n_outputs_) : id(-1), num_inputs(n_inputs_), num_outputs(n_outputs_) 
 		{
 			inputs = new data_unit[num_inputs];
 			outputs = new data_unit[num_outputs];
+
+			child.clear();
+			parent.clear();
 
 		}
 
