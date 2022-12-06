@@ -44,6 +44,15 @@ namespace n_block
 
 		virtual void execute() = 0;
 
+		int get_subsystemID()
+		{
+			return subsystem_id;
+		}
+
+		void set_subsystemID(int ssid_)
+		{
+			subsystem_id = ssid_;
+		}
 	
 		void set_type(block_type b_type)
 		{
@@ -79,9 +88,19 @@ namespace n_block
 			add_input(parent_block_);
 		}
 
-		void set_output_port(block* child_block_)
+		void set_output_port(int port_num, base::data_unit* child_ip_data, block* child_block_)
 		{
+			outputs[port_num] = *child_ip_data;
 			add_output(child_block_);
+		}
+
+		bool remove_block()
+		{
+			if (get_num_inputs() != get_num_outputs())
+				return false;
+
+			outputs[0] = inputs[0];
+			return true;
 		}
 	};
 }

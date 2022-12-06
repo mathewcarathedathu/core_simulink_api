@@ -65,6 +65,15 @@ namespace base
 			return id;
 		}
 
+		int get_num_inputs()
+		{
+			return num_inputs;
+		}
+
+		int get_num_outputs()
+		{
+			return num_outputs;
+		}
 	};
 
 }
