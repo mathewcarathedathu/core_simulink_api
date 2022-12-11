@@ -93,15 +93,16 @@ namespace components
 			return child_block_;
 		}
 
-		void set_input_port(int port_num, base::data_unit* parent_op_data, block* parent_block_)
+		void set_input_port(int input_port_num, int output_port_num, block* parent_block_)
 		{
-			inputs[port_num] = *parent_op_data;
+			inputs[input_port_num] = parent_block_->outputs[output_port_num];
 			add_input(parent_block_);
 		}
 
-		void set_output_port(int port_num, base::data_unit* child_ip_data, block* child_block_)
+		void set_output_port(int output_port_num, int input_port_num, block* child_block_)
 		{
-			outputs[port_num] = *child_ip_data;
+			
+			//outputs[output_port_num] = child_block_->inputs[input_port_num];
 			add_output(child_block_);
 		}
 

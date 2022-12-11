@@ -13,7 +13,7 @@ namespace f_block
 		int num_ip = 0;
 		int num_op = 1;
 
-		double previous_update_num;
+		
 	public:
 
 		input_block(int subsys_id = -1) :
@@ -26,7 +26,7 @@ namespace f_block
 		{
 			outputs[0].data = ++prev_num;
 			outputs[0].update_num++;
-			previous_update_num = inputs[0].update_num;
+			
 
 			return true;
 		}

@@ -17,7 +17,7 @@ namespace base
 
 		
 	protected:
-		data_unit* inputs;
+		data_unit** inputs;
 		data_unit* outputs;
 
 		std::set<func_unit*> child;
@@ -42,7 +42,7 @@ namespace base
 
 		func_unit(uint8_t n_inputs_, uint8_t n_outputs_) : id(-1), num_inputs(n_inputs_), num_outputs(n_outputs_) 
 		{
-			inputs = new data_unit[num_inputs];
+			inputs = new data_unit*[num_inputs];
 			outputs = new data_unit[num_outputs];
 
 			child.clear();
