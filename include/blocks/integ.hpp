@@ -4,9 +4,9 @@
 
 #include "block.hpp"
 
-namespace n_block
+namespace f_block
 {
-	class integ_block : public block
+	class integ_block : public components::block
 	{
 	private:
 		int num_ip = 1;
@@ -30,6 +30,8 @@ namespace n_block
 			prev_val = inputs[0].data;
 			outputs[0].update_num++;
 			previous_update_num = inputs[0].update_num;
+
+			return true;
 		}
 	};
 }

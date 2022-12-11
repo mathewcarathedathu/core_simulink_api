@@ -9,7 +9,7 @@
 #include "func_unit.hpp"
 #include "block.hpp"
 
-namespace n_subsys
+namespace components
 {
 	class subsystem : public base::func_unit
 	{
@@ -17,14 +17,14 @@ namespace n_subsys
 		std::set<int> block_ids;
 		
 	public:
-		void add_block(n_block::block& block_)
+		void add_block(block& block_)
 		{
 			block_ids.insert(block_.get_id());
 			block_.set_subsystemID(get_id());
 
 		}
 
-		bool remove_block(n_block::block& block_)
+		bool remove_block(block& block_)
 		{
 			auto block_it_ = block_ids.find(block_.get_id());
 

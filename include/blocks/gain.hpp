@@ -4,9 +4,9 @@
 
 #include "block.hpp"
 
-namespace n_block
+namespace f_block
 {
-	class gain_block : public block
+	class gain_block : public components::block
 	{
 	private:
 		double p_gainFactor;
@@ -29,6 +29,8 @@ namespace n_block
 			outputs[0].data = inputs[0].data* p_gainFactor;
 			outputs[0].update_num++;
 			previous_update_num = inputs[0].update_num;
+
+			return true;
 		}
 	};
 }

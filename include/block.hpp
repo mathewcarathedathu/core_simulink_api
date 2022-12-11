@@ -23,7 +23,7 @@ enum class block_type : unsigned char
 	E_INTEG,
 	E_DIFF	
 };
-namespace n_block
+namespace components
 {
 	class block : public base::func_unit
 	{
