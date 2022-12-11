@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <list>
+#include <iterator>
+#include <algorithm>
 
 namespace components
 {
@@ -30,8 +32,50 @@ namespace components
 				delete* itr;
 		}
 
-		void execute()
+		bool execute()
 		{
+			block* a;
+			std::unordered_set<block*> curr_level;
+			std::unordered_set<block*> next_level;
+			int curr_ct;
+			int next_ct = 0;
+			int ct;
+			for (auto itr = inputs.begin(); itr != inputs.end(); ++itr)
+			{
+				curr_level.insert(curr_level.begin(), *itr);
+				next_ct++;
+			}
+
+			while (true)
+			{
+				curr_ct = next_ct;
+				next_ct = 0;
+				ct = 0;
+				for (auto itr = curr_level.begin(); itr != curr_level.end(); ++itr)
+				{
+					(*itr)->execute();
+					if ((*itr)->get_type() != ::block_type::E_OUTPUT)
+					{
+						auto child_blocks_ = (*itr)->get_child_blocks();
+
+						if (child_blocks_.size() > 0)
+						{
+							std::set_union(next_level.begin(), next_level.end(),
+								child_blocks_.begin(), child_blocks_.end(),
+								next_level.end());
+
+							next_ct++;
+						}
+					}
+				}
+
+				if (next_level.size() == 0)
+					break;
+				curr_level.clear();
+				curr_level = next_level;
+				next_level.clear();
+			}
+
 
 		}
 		void add_block(block& curr_block)
@@ -48,12 +92,14 @@ namespace components
 
 			}
 			blocks.insert(blocks.end(), &curr_block);
+			block_id[curr_block.get_id()] = &curr_block;
 		}
 
 		void connect_ports(block& parent_block, int parent_port_num,
 			block& child_block, int child_port_num)
 		{
-
+			parent_block.set_input_port(parent_port_num, child_port_num, &child_block);
+			children[&parent_block].insert(children[&parent_block].end(), &child_block);
 		}
 		
 	};
