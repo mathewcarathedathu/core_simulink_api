@@ -23,13 +23,13 @@ namespace f_block
 
 		bool execute()
 		{
-			if (inputs[0].update_num <= previous_update_num)
+			if (inputs[0]->update_num <= previous_update_num)
 				return false;
 
-			outputs[0].data = inputs[0].data * prev_val;
-			prev_val = inputs[0].data;
+			outputs[0].data = inputs[0]->data * prev_val;
+			prev_val = inputs[0]->data;
 			outputs[0].update_num++;
-			previous_update_num = inputs[0].update_num;
+			previous_update_num = inputs[0]->update_num;
 
 			return true;
 		}
