@@ -117,7 +117,7 @@ namespace components
 		bool add_block_to_ss(subsystem& ss_, block& block_)
 		{
 			if(!ss_.add_block(block_))
-				return false;
+				return false; // If the block is already part of subsystem
 
 			subsystems[&ss_].insert(subsystems[&ss_].begin(), &block_);
 
@@ -138,7 +138,7 @@ namespace components
 				for (auto itr = child_blocks_.begin(); itr != child_blocks_.end(); ++itr)
 				{
 					int child_ssid = (*itr)->get_subsystemID();
-					if (child_ssid != -1)
+					if (child_ssid != -1 && child_ssid != ss_.get_id())
 						ss_.add_child(ss_id[child_ssid]);
 
 				}
@@ -149,7 +149,7 @@ namespace components
 				for (auto itr = parent_blocks_.begin(); itr != parent_blocks_.end(); ++itr)
 				{
 					int parent_ssid = (*itr)->get_subsystemID();
-					if (parent_ssid != -1)
+					if (parent_ssid != -1 && parent_ssid != ss_.get_id())
 						ss_.add_parent(ss_id[parent_ssid]);
 
 				}
