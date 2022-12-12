@@ -17,17 +17,35 @@ A subsystem is composed of one or more blocks.
 Each block performs some function.
 ~~~
 
-Each block and subsystem may have one of more inputs and outputs, which may flow unrestricted in any directions (i.e) feedback loops are allowed. 
+Each block and subsystem may have one of more inputs and outputs, which may flow unrestricted in any direction (i.e) feedback loops are allowed. 
 
+# Project Organization
+
+I used Visual Studio 2022 as my development environment. The project files are included in this repository. 
+
+All of the essential code is written as hpp files. They are placed in the include directory. Examples of blocks created are placed in the include/blocks directory. A test script (also containing the main function) and set to be the entry point for the VS project is in the test directory.
 # System architecture
+
+The system is designed at multiple levels.
+
+## Data Unit
+This is the fundamental unit of data storage. For simplicity, I have assumed that all data is of type double. The data unit also contains an update index to determine relative age of the data
+
+## Func unit
+This is the base class for blocks and subsystems. Contains basic variable (like id, etc) and supporting functions. It also contains the input and output signal defintion.
 
 ## Block
 
-Each block can have any number of input and output signals. For the sake of simplicity, I am going to set a max value, but allocate the memory for the input and output dynamically. 
+Each block can have any number of input and output signals, which is set at run time. The block functionality is derived from the func unit and data unit classes and builds on top of it. 
 
-In addition to that, there are some common members all blocks should have. For eg, the function definition, the run function, the ability to turn off the automatic run capablity but instead run only on a call from an external source, say a scheduler runnig off a master clock, for eg.. 
+## Subystems
 
-For the moment, lets assume that all input and output types are floats. In the future, it will be need to be changed to a template
+This is similar to block, with slightly different methods serving functions specific to subsystems.
+
+Since the question is asking only for the query functions, much attention wasn't paid towards this functionality. For eg. subsystem doesn't have a common input/output bus. And the nodes are run individually, not at the subsystem level.
+
 ## Model
+ This brings everything together. The nodes (blocks and subsystems) are held together using a graph topology. The list of nodes are stored and a map of connections between them are used to define the replationships. Currently blocks and subsystems are treated differently. 
+
 Initial impressions indicate that subsystems and models be defined as a bidirectional graph. More details to be fleshed out as the development progresses.
 
