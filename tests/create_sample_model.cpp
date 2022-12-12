@@ -4,6 +4,8 @@
 #include <model.hpp>
 #include <output.hpp>
 
+#include <iostream>
+
 int main()
 {
 	components::model curr_model;
@@ -38,4 +40,6 @@ int main()
 		curr_model.execute();
 		ct++;
 	}
+
+	std::cin.get();
 }

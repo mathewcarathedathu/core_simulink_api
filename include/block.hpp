@@ -65,6 +65,8 @@ namespace components
 		{
 			child.clear();
 			parent.clear();
+
+			init_outputs();
 		};
 
 		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_, int ss_id) : 
@@ -74,6 +76,8 @@ namespace components
 		{
 			child.clear();
 			parent.clear();
+
+			init_outputs();
 		};
 
 		virtual bool execute() = 0;

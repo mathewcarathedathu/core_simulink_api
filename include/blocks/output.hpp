@@ -19,13 +19,13 @@ namespace f_block
 	public:
 
 		output_block(int subsys_id = -1) :
-			block(num_ip, num_op, ::block_type::E_OUTPUT, subsys_id),
+			num_ip(1), num_op(0),
+			block(1, 0, ::block_type::E_OUTPUT, subsys_id),
 			prev_num(0)
 		{};
 
 		bool execute()
 		{
-
 			auto a = inputs[0]->data;
 			auto b = inputs[0]->update_num;
 			

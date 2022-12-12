@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <memory>
 #include <set>
+#include <iostream>
 
 #include "data_unit.h"
 namespace base
@@ -27,16 +28,23 @@ namespace base
 
 		func_unit(uint8_t n_inputs_, uint8_t n_outputs_) : id(-1), num_inputs(n_inputs_), num_outputs(n_outputs_) 
 		{
-			inputs = new data_unit*[num_inputs];
-			outputs = new data_unit[num_outputs];
+			if (num_inputs > 0)
+				inputs = new data_unit*[num_inputs];
+			
+			if (num_outputs > 0)
+				outputs = new data_unit[num_outputs];
 
 
 		}
 
 		~func_unit()
 		{
-			delete[] inputs;
-			delete[] outputs;
+			std::cout << "Destructor " << id << std::endl;
+			if(num_inputs > 0)
+				delete[] inputs;
+
+			if (num_outputs > 0)
+				delete[] outputs;
 		}
 
 
@@ -58,6 +66,16 @@ namespace base
 		int get_num_outputs()
 		{
 			return num_outputs;
+		}
+
+		void init_outputs()
+		{
+			for (int i = 0; i < num_outputs; i++)
+			{
+				outputs[i].update_num = 0;
+				outputs[i].data = 0;
+			}
+
 		}
 	};
 

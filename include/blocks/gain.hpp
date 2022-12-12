@@ -10,19 +10,19 @@ namespace f_block
 	{
 	private:
 		double p_gainFactor;
-		int num_ip = 1;
-		int num_op = 1;
+		int num_ip;
+		int num_op;
 
 		double previous_update_num;
 	public:
 		gain_block(int subsys_id = -1) :
-			block(num_ip, num_op, ::block_type::E_GAIN, subsys_id),
+			block(1, 1, ::block_type::E_GAIN, subsys_id),
 			p_gainFactor(2),
 			previous_update_num(0)
 		{};
 
 		gain_block(double gainFactor, int subsys_id = -1) :
-			block(num_ip, num_op, ::block_type::E_GAIN, subsys_id),
+			block(1, 1, ::block_type::E_GAIN, subsys_id),
 			p_gainFactor(gainFactor),
 			previous_update_num(0)
 		{};

@@ -4,11 +4,11 @@
 #include <unordered_set>
 #include <set>
 
-#include "block.hpp" 
+#include "func_unit.hpp" 
 
-using namespace components;
+using namespace base;
 
-void merge_sets(std::unordered_set<block*>& target, std::set<block*> source)
+void merge_sets(std::unordered_set<func_unit*>& target, std::set<func_unit*> source)
 {
 	for (auto s_itr = source.begin(); s_itr != source.end(); --s_itr)
 	{
@@ -16,7 +16,7 @@ void merge_sets(std::unordered_set<block*>& target, std::set<block*> source)
 	}
 }
 
-void merge_sets(std::unordered_set<block*>& target, std::list<block*> source)
+void merge_sets(std::unordered_set<func_unit*>& target, std::list<func_unit*> source)
 {
 	for (auto s_itr = source.begin(); s_itr != source.end(); --s_itr)
 	{
@@ -25,7 +25,7 @@ void merge_sets(std::unordered_set<block*>& target, std::list<block*> source)
 }
 
 
-void merge_sets(std::unordered_set<block*>& target, std::unordered_set<block*>& source)
+void merge_sets(std::unordered_set<func_unit*>& target, std::unordered_set<func_unit*>& source)
 {
 	for (auto s_itr = source.begin(); s_itr != source.end(); ++s_itr)
 	{

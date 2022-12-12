@@ -16,7 +16,7 @@ namespace f_block
 		double previous_update_num;
 	public:
 		integ_block(int subsys_id = -1) :
-			block(num_ip, num_op, ::block_type::E_INTEG, subsys_id),
+			block(1, 1, ::block_type::E_INTEG, subsys_id),
 			previous_update_num(0),
 			prev_val(0)
 		{};
