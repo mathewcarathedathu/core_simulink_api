@@ -39,7 +39,6 @@ namespace base
 
 		~func_unit()
 		{
-			std::cout << "Destructor " << id << std::endl;
 			if(num_inputs > 0)
 				delete[] inputs;
 

@@ -22,7 +22,7 @@ namespace components
 	public:
 		bool add_block(block& block_)
 		{
-			if (block_.get_id() > 0)
+			if (block_.get_subsystemID() > 0)
 				return false;
 
 			block_ids.insert(block_.get_id());
