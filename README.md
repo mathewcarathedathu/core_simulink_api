@@ -44,8 +44,22 @@ This is similar to block, with slightly different methods serving functions spec
 
 Since the question is asking only for the query functions, much attention wasn't paid towards this functionality. For eg. subsystem doesn't have a common input/output bus. And the nodes are run individually, not at the subsystem level.
 
+## Graph Edges
+ The mechnism for transfer of data are represented as graph edges. In this implementation, the input port of each block is pointed to the memory location of the output port of the parent.
 ## Model
  This brings everything together. The nodes (blocks and subsystems) are held together using a graph topology. The list of nodes are stored and a map of connections between them are used to define the replationships. Currently blocks and subsystems are treated differently. 
 
 Initial impressions indicate that subsystems and models be defined as a bidirectional graph. More details to be fleshed out as the development progresses.
+
+# Scope for improvment
+
+Although I have completed the tasks listed, I felt that there is a lot of scope for improvement. An incomplete list includes
+
+1. Right now the model assumes that all ports are connected and that there are no dangling edges. A check can be instituted. 
+
+2. Right now data transfer between nodes occurs at the memory level. Although in the execution mode I have defined it will work well, it wont hold up in an asynchronous environment. For e.g, in a case where each node is running at its own independent rate, this implementation is ripe for memory access errors. Although using mutex operations is the obvious choice, a better option may be to use double buffers as we can better ensure availability of memory locations. 
+
+3. Subsystems are currently just assumed to be a big box over a group of blocks. A better implementation is to use subsystems as black boxes with the model having no visibility into the inner block architecture and functioning. The memory needed for this is already allocated in my implementation, just not fully implemented. 
+
+4. All the fuctionality needed for a typical Simulink user workflow has not been implemented. That is a big area for improvement. 
 
