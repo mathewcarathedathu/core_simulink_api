@@ -33,25 +33,48 @@ namespace components
 		int subsystem_id;
 		block_type type;
 
+		std::set<block*> child;
+		std::set<block*> parent;
+
+		void add_input(block* block_)
+		{
+			parent.insert(block_);
+		}
+
+		void add_output(block* block_)
+		{
+			child.insert(block_);
+		}
+
+
 		
 	public:
 
 		block() : 
 			subsystem_id(-1), 
-			type(block_type::E_NONE) 
-		{};
+			type(block_type::E_NONE)
+		{
+			child.clear();
+			parent.clear();
+		}
 
 		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_) : 
 			subsystem_id(-1), 
 			func_unit(n_inputs, n_outputs), 
 			type(b_type_) 
-		{};
+		{
+			child.clear();
+			parent.clear();
+		};
 
 		block(uint8_t n_inputs, uint8_t n_outputs, block_type b_type_, int ss_id) : 
 			subsystem_id(ss_id), 
 			func_unit(n_inputs, n_outputs), 
 			type(b_type_) 
-		{};
+		{
+			child.clear();
+			parent.clear();
+		};
 
 		virtual bool execute() = 0;
 
@@ -81,38 +104,38 @@ namespace components
 			return subsystem_id;
 		}
 
-		std::set<func_unit*> get_parent_blocks()
+		std::set<block*> get_parent_blocks()
 		{
-			std::set<func_unit*> parent_block_(parent);
+			std::set<block*> parent_block_(parent);
 			return parent_block_;
 		}
 
-		std::set<func_unit*> get_child_blocks()
+		std::set<block*> get_child_blocks()
 		{
-			std::set<func_unit*> child_block_(child);
+			std::set<block*> child_block_(child);
 			return child_block_;
 		}
 
 		void set_input_port(int input_port_num, int output_port_num, block* parent_block_)
 		{
-			inputs[input_port_num] = parent_block_->outputs[output_port_num];
+			inputs[input_port_num] = &parent_block_->outputs[output_port_num];
 			add_input(parent_block_);
 		}
 
-		void set_output_port(int output_port_num, int input_port_num, block* child_block_)
+		void set_output_port(block* child_block_)
 		{
 			
 			//outputs[output_port_num] = child_block_->inputs[input_port_num];
 			add_output(child_block_);
 		}
 
-		bool remove_block()
+		/*bool remove_block()
 		{
 			if (get_num_inputs() != get_num_outputs())
 				return false;
 
 			outputs[0] = inputs[0];
 			return true;
-		}
+		}*/
 	};
 }
