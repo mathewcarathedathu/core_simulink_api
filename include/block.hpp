@@ -103,11 +103,6 @@ namespace components
 			return type;
 		}
 
-		int get_parent()
-		{
-			return subsystem_id;
-		}
-
 		std::set<block*> get_parent_blocks()
 		{
 			std::set<block*> parent_block_(parent);
