@@ -48,7 +48,7 @@ std::string get_block_type_str(components::block* block_)
 
 void merge_sets(std::unordered_set<func_unit*>& target, std::set<func_unit*> source)
 {
-	for (auto s_itr = source.begin(); s_itr != source.end(); --s_itr)
+	for (auto s_itr = source.begin(); s_itr != source.end(); ++s_itr)
 	{
 		target.insert(target.end(), *s_itr);
 	}
@@ -56,7 +56,7 @@ void merge_sets(std::unordered_set<func_unit*>& target, std::set<func_unit*> sou
 
 void merge_sets(std::unordered_set<func_unit*>& target, std::list<func_unit*> source)
 {
-	for (auto s_itr = source.begin(); s_itr != source.end(); --s_itr)
+	for (auto s_itr = source.begin(); s_itr != source.end(); ++s_itr)
 	{
 		target.insert(target.end(), *s_itr);
 	}
